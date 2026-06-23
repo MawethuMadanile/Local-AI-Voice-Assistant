@@ -1,0 +1,33 @@
+# =============================================================================
+# Jarvis — Cross-platform voice assistant requirements
+# =============================================================================
+# Install with:  pip install -r requirements.txt
+#
+# For GPU acceleration see INSTALL.md — extra steps are needed per platform.
+# =============================================================================
+
+# --- Audio I/O (cross-platform, replaces PyAudio + playsound) ---------------
+sounddevice>=0.4.6
+soundfile>=0.12.1
+
+# --- VAD — Silero VAD (CPU, cross-platform) ----------------------------------
+silero-vad>=5.1
+torch>=2.1.0              # Silero VAD dependency; CPU-only wheels available
+
+# --- STT — faster-whisper (CTranslate2, cross-platform) ----------------------
+faster-whisper>=1.0.0
+
+# --- LLM — llama-cpp-python (GGUF, CPU+GPU) ----------------------------------
+# CPU wheel (all platforms):
+llama-cpp-python>=0.2.90
+# For CUDA, see INSTALL.md — pip install from a different index URL
+
+# --- TTS — Kokoro ONNX (cross-platform, no GPU required) ---------------------
+kokoro-onnx>=0.4.0
+onnxruntime>=1.18.0       # CPU runtime; swap for onnxruntime-gpu if desired
+
+# --- HuggingFace Hub (model downloads) ----------------------------------------
+huggingface-hub>=0.23.0
+
+# --- Utilities ----------------------------------------------------------------
+numpy>=1.24.0
