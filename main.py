@@ -1,5 +1,5 @@
 """
-main.py — Jarvis cross-platform voice assistant.
+main.py — ODIN (Offline Distributed Intelligence Network) voice assistant.
 
 Architecture
 ------------
@@ -38,6 +38,7 @@ from llm import LLMEngine
 from stt import Transcriber, VADDetector
 from tts import Synthesiser
 
+
 # ── Suppress Windows asyncio ConnectionResetError (WinError 10054) noise ──────
 def _suppress_win_asyncio_noise() -> None:
     if sys.platform != "win32":
@@ -58,6 +59,7 @@ def _suppress_win_asyncio_noise() -> None:
 
     loop.set_exception_handler(_handler)
 
+
 _suppress_win_asyncio_noise()
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -77,8 +79,7 @@ DIM    = "\033[2m"
 RESET  = "\033[0m"
 
 
-
-class Jarvis:
+class ODIN:
     def __init__(self) -> None:
         self._print_banner()
         self._log("Loading models…")
@@ -143,7 +144,7 @@ class Jarvis:
             if not reply:
                 continue
 
-            # 3. Print with punctuation, speak without
+            # 3. Print and speak
             self._print_assistant(reply)
             self._speak(reply)
 
@@ -201,17 +202,17 @@ class Jarvis:
         print(f"{GREEN}You › {RESET}{text}")
 
     def _print_assistant(self, text: str) -> None:
-        print(f"{YELLOW}Jarvis › {RESET}{text}\n")
+        print(f"{YELLOW}ODIN › {RESET}{text}\n")
 
     def _print_banner(self) -> None:
         print(f"""
-{CYAN}╔══════════════════════════════════╗
-║          J A R V I S             ║
-║  Cross-platform voice assistant  ║
-╚══════════════════════════════════╝{RESET}
+{CYAN}╔════════════════════════════════════════════╗
+║                 O  D  I  N                 ║
+║  Offline Distributed Intelligence Network  ║
+╚════════════════════════════════════════════╝{RESET}
 """)
 
 
 if __name__ == "__main__":
-    jarvis = Jarvis()
-    jarvis.run()
+    odin = ODIN()
+    odin.run()

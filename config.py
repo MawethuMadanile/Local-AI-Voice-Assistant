@@ -1,8 +1,7 @@
 """
-Jarvis — Cross-platform voice assistant configuration.
+ODIN — Offline Distributed Intelligence Network: configuration.
 """
 
-import os
 import platform
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -35,41 +34,45 @@ class STTConfig:
     compute_type: str = "int8"
     language: str = "en"
     min_samples: int = 8000
+    voice: str = "am_michael"
+    speed: float = 1.05
 
 
 @dataclass
 class LLMConfig:
-    model_path: str = "models/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
-    hf_repo: str = "TheBloke/Mistral-7B-Instruct-v0.2-GGUF"
-    hf_filename: str = "mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+    # Phi-3 mini 4k: 3.8B params, ~2.3 GB, the viable size for this hardware
+    model_path: str = "models/Phi-3-mini-4k-instruct-q4.gguf"
+    hf_repo: str = "microsoft/Phi-3-mini-4k-instruct-gguf"
+    hf_filename: str = "Phi-3-mini-4k-instruct-q4.gguf"
 
-    n_gpu_layers: int = 20
-    n_threads: int = 10
-    context_length: int = 2048
-    max_tokens: int = 512
+    n_gpu_layers: int = 0
+    n_threads: int = 8
+    context_length: int = 4096
+    max_tokens: int = 256
     temperature: float = 0.7
     top_p: float = 0.9
 
-    # Forms of address Jarvis will rotate through when speaking to the user.
-    # Add, remove, or reorder entries freely.
-    user_titles: list = field(default_factory=lambda: [
-        "Sir",
-        "Mr Madanile",
-    ])
+    # Forms of address, cycled one per reply. Edit or shorten to taste.
+    user_titles: list[str] = field(default_factory=lambda: ["Sir", "Mr Madanile"])
 
     system_prompt: str = (
-        "You are Jarvis, an AI assistant. "
-        "Speak in plain, natural sentences as if talking aloud. "
-        "Never use markdown, bullet points, numbered lists, dashes, or headers. "
+        "You are ODIN, an AI assistant. "
+        "Your name stands for Offline Distributed Intelligence Network. "
+        "Speak in plain, natural spoken sentences only. "
+        "Never use markdown, code blocks, backticks, bullet points, "
+        "numbered lists, dashes, or headers. "
         "Never start your reply with a number. "
-        "Keep every response to one or two sentences unless the user asks for detail. "
-        "Address the user by the title you are given at the start of each instruction."
+        "Never ask follow-up questions. "
+        "Answer directly and concisely in one or two sentences. "
+        "If you cannot do something, say so in one sentence."
     )
 
 
 @dataclass
 class TTSConfig:
-    voice: str = "bm_george"
+    # af_bella: American female, expressive
+    # Male options: bm_george (British), am_michael (American)
+    voice: str = "af_bella"
     speed: float = 1.05
     sample_rate: int = 24000
     trim_silence: bool = True

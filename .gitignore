@@ -1,0 +1,6 @@
+
+models/
+*.gguf
+*.onnx
+*.bin
+data/
