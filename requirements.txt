@@ -1,9 +1,11 @@
 # =============================================================================
-# Jarvis — Cross-platform voice assistant requirements
+# ODIN — Offline Distributed Intelligence Network: requirements
 # =============================================================================
 # Install with:  pip install -r requirements.txt
 #
-# For GPU acceleration see INSTALL.md — extra steps are needed per platform.
+# Tested on Windows with Python 3.14. GPU acceleration notes are in README.md.
+# Model files are NOT installed by pip: Kokoro's two voice files go in the
+# project root (see README.md) and Phi-3 downloads itself on first run.
 # =============================================================================
 
 # --- Audio I/O (cross-platform, replaces PyAudio + playsound) ---------------
@@ -13,6 +15,7 @@ soundfile>=0.12.1
 # --- VAD — Silero VAD (CPU, cross-platform) ----------------------------------
 silero-vad>=5.1
 torch>=2.1.0              # Silero VAD dependency; CPU-only wheels available
+torchaudio>=2.1.0         # imported by Silero VAD; keep in step with torch
 
 # --- STT — faster-whisper (CTranslate2, cross-platform) ----------------------
 faster-whisper>=1.0.0
@@ -20,13 +23,15 @@ faster-whisper>=1.0.0
 # --- LLM — llama-cpp-python (GGUF, CPU+GPU) ----------------------------------
 # CPU wheel (all platforms):
 llama-cpp-python>=0.2.90
-# For CUDA, see INSTALL.md — pip install from a different index URL
+# On Windows, install a pre-built wheel to avoid compiling (long-path errors):
+#   pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+# For CUDA, use the matching /whl/cuXXX index instead of /whl/cpu.
 
 # --- TTS — Kokoro ONNX (cross-platform, no GPU required) ---------------------
 kokoro-onnx>=0.4.0
 onnxruntime>=1.18.0       # CPU runtime; swap for onnxruntime-gpu if desired
 
-# --- HuggingFace Hub (model downloads) ----------------------------------------
+# --- HuggingFace Hub (automatic model download) -------------------------------
 huggingface-hub>=0.23.0
 
 # --- Utilities ----------------------------------------------------------------
