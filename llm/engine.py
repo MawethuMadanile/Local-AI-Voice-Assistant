@@ -2,7 +2,7 @@
 llm/engine.py — LLM inference using llama-cpp-python (GGUF format).
 
 Prompt format: Phi-3 chat template (<|system|> / <|user|> / <|assistant|>).
-Conversation history is saved to data/history.json so Nova remembers
+Conversation history is saved to data/history.json so ODIN remembers
 across restarts.
 """
 
@@ -17,7 +17,7 @@ from config import cfg, ROOT
 
 HISTORY_FILE = ROOT / "data" / "history.json"
 
-# Phi-3 control tokens — stop generating the moment any of them appears
+# Phi-3 control tokens: stop generating the moment any of them appears
 STOP_TOKENS = ["<|end|>", "<|user|>", "<|assistant|>", "<|system|>", "</s>"]
 
 

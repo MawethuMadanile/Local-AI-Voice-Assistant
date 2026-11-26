@@ -4,3 +4,9 @@ models/
 *.onnx
 *.bin
 data/
+
+models/
+*.gguf
+*.onnx
+*.bin
+data/

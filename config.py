@@ -72,7 +72,7 @@ class LLMConfig:
 class TTSConfig:
     # af_bella: American female, expressive
     # Male options: bm_george (British), am_michael (American)
-    voice: str = "af_bella"
+    voice: str = "am_michael"
     speed: float = 1.05
     sample_rate: int = 24000
     trim_silence: bool = True
